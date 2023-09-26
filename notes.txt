@@ -1,5 +1,5 @@
 how to creat a website ?
-1- creat the web werver
+1- creat the web server
 2- define handlers
 3- connect(import) package ascii-art
 4- HTML 
