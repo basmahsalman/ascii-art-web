@@ -1,0 +1,12 @@
+how to creat a website ?
+1- creat the web werver
+2- define handlers
+3- connect(import) package ascii-art
+4- HTML 
+
+*HTML can be done first step (front to back), above steps back to front
+
+*at some point the data must be sent to the web server, by using javascript or forms... it is recommended 
+to use the form to maintain mental and psychological health
+
+Powerpuff coders can do it >:)
