@@ -32,8 +32,11 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Bad Request - incorrect request
-	// Internal server error - unhadled errors
+	// Bad Request 400 - incorrect request
+	// blank
+
+	// Internal server error 500 - unhadled errors
+	// arabic
 }
 
 func formHandler(w http.ResponseWriter, r *http.Request) {
