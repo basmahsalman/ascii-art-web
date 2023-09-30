@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
+	//"html/template"
+	ar "asciiartweb"
 	"log"
 	"net/http"
 )
 
+type textBanner struct {
+	converted [][]string
+}
+
 func main() {
 
 	fileServer := http.FileServer(http.Dir("./static"))
-	http.HandleFunc("/form", formHandler)
+	http.HandleFunc("/", formHandler)
 	http.Handle("/", fileServer)
 	// http.HandleFunc("/form", formHandler)
 	http.HandleFunc("/ascii-art-web", Handler)
@@ -45,9 +51,15 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	fmt.Fprintf(w, "POST request successful")
-	name := r.FormValue("name")
+	text := r.FormValue("text")
 	banner := r.FormValue("banner")
 
-	fmt.Fprintf(w, "Name = %s\n", name)
+	fmt.Fprintf(w, "Text = %s\n", text)
 	fmt.Fprintf(w, "Banner = %s\n", banner)
+
+	// Call Validating Inputs
+	ar.ValidatingInput(text)
+
+	// Calling Storing Function
+	ar.PrintArray(text, banner)
 }

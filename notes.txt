@@ -10,3 +10,10 @@ how to creat a website ?
 to use the form to maintain mental and psychological health
 
 Powerpuff coders can do it >:)
+
+30/09/2023
+Hello,
+We added Ascii Art functions and called them 
+We need to display the data 
+Please refer to the following video <3
+https://www.youtube.com/watch?v=8yKBlZaWM-0
