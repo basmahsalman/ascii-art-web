@@ -13,7 +13,8 @@ import (
 var tmpl *template.Template
 
 func init() {
-	tmpl = template.Must(template.ParseFiles("../static/form.html"))
+	tmpl = template.Must(template.ParseFiles("../static/index.html"))
+
 }
 
 type textBanner struct {
@@ -25,10 +26,10 @@ func main() {
 
 	// fileServer := http.FileServer(http.Dir("./static"))
 	//1
-	http.HandleFunc("/", formHandler)
+	http.HandleFunc("/", Handler)
 	// http.Handle("/", fileServer)
 	// http.HandleFunc("/form", formHandler)
-	http.HandleFunc("/ascii-art-web", Handler)
+	http.HandleFunc("/ascii-art", formHandler)
 
 	fmt.Printf("Starting the server at port 8080\n")
 	//1
@@ -37,18 +38,17 @@ func main() {
 	}
 }
 
-// handler for the gathering the data
 // func Handler(w http.ResponseWriter, r *http.Request) {
-// 	if r.URL.Path != "/ascii-art-web" {
-// 		// if template / banner are not found
-// 		http.Error(w, "404 Not Found.", http.StatusNotFound)
-// 		return
-// 	}
+// if r.URL.Path != "/ascii-art-web" {
+// 	// if template / banner are not found
+// 	http.Error(w, "404 Not Found.", http.StatusNotFound)
+// 	return
+// }
 
-// 	if r.Method != "GET" {
-// 		http.Error(w, "Method is not supported", http.StatusNotFound)
-// 		return
-// 	}
+// if r.Method != "GET" {
+// 	http.Error(w, "Method is not supported", http.StatusNotFound)
+// 	return
+// }
 
 // 	// Bad Request 400 - incorrect request
 // 	// blank
@@ -59,13 +59,25 @@ func main() {
 
 // again handler for gathering data
 func Handler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		tmpl.Execute(w, nil)
+	if r.URL.Path != "/" {
+		http.Error(w, "404 Page not found", http.StatusNotFound)
 		return
 	}
+	if r.Method != http.MethodPost {
+		err := tmpl.Execute(w, nil)
+		if err != nil {
+			log.Println(err)
+		}
+		return
+	}
+	// if r.URL.Path != "/ascii-art-web" {
+	// 	// if template / banner are not found
+	// 	http.Error(w, "404 Not Found.", http.StatusNotFound)
+	// 	return
+	// }
+
 	// ascii is the converted text we want to print
 	ascii := textBanner{
-		// hmmm, mismatch type string and [][]string
 		converted: r.FormValue("converted"),
 	}
 	tmpl.Execute(w, struct {
@@ -83,7 +95,21 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "ParseForm() err: %v", err)
 		return
 	}
+	if r.Method != "GET" {
+		http.Error(w, "Method is not supported", http.StatusNotFound)
+		return
+	}
+	if r.FormValue("text") == "" {
+		http.Error(w, "400 Bad Request.", http.StatusNotFound)
+		return
+	}
+	if r.FormValue("banner") != "standard" || r.FormValue("banner") != "shadow" || r.FormValue("banner") != "thinkertoy" {
+		http.Error(w, "500 Internal server error.", http.StatusNotFound)
+		return
+	}
+
 	fmt.Fprintf(w, "POST request successful")
+
 	text := r.FormValue("text")
 	banner := r.FormValue("banner")
 
