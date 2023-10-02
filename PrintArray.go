@@ -5,8 +5,12 @@ import (
 	"strings"
 )
 
-func PrintArray(text string, banner string) {
+func PrintArray(text string, banner string) string {
 	StoringChars(banner)
+
+	//instead of this function JOIN the 2d array so it becomes one string, HTML doesn't take 2d array, it takes string
+	// make the function return a string
+	
 	var ascii rune
 	newLine := strings.Split(text, "\n")
 	for _, v := range newLine {
@@ -26,4 +30,5 @@ func PrintArray(text string, banner string) {
 			fmt.Print("\n")
 		}
 	}
+	return "h"
 }

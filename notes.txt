@@ -17,3 +17,9 @@ We added Ascii Art functions and called them
 We need to display the data 
 Please refer to the following video <3
 https://www.youtube.com/watch?v=8yKBlZaWM-0
+
+2/10/2023
+the template is created
+fonts are added
+handlers are done
+404, 400, 500 are done
