@@ -15,13 +15,13 @@ func StoringChars(font string) [][]string {
 	var err error
 	switch font {
 	case "standard":
-		file, err = os.Open("Fonts/standard.txt")
+		file, err = os.Open("fonts/standard.txt")
 	case "shadow":
-		file, err = os.Open("Fonts/shadow.txt")
+		file, err = os.Open("fonts/shadow.txt")
 	case "thinkertoy":
-		file, err = os.Open("Fonts/thinkertoy.txt")
+		file, err = os.Open("fonts/thinkertoy.txt")
 	default:
-		file, err = os.Open("Fonts/standard.txt")
+		file, err = os.Open("fonts/standard.txt")
 	}
 	if err != nil {
 		fmt.Println("Error:", err)

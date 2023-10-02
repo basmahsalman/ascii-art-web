@@ -4,6 +4,9 @@
     <title> Ascii Art Web :p </title>
 </head>
 <body>
+    {{if .Success}}
+    <b>text converted:</b>{{.ascii.converted}}<br>
+    {{else}}
 <div>
     <h1>Ascii Art Web</h1>
   <form method="POST" action="/form">     
@@ -18,5 +21,6 @@
       <input type="submit" value="submit" />
   </form>
 </div>
+{{end}}
 </body>
 </html>
