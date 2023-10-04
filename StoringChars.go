@@ -13,6 +13,7 @@ func StoringChars(font string) [][]string {
 	/* storing the charecters as 2d arrays */
 	var file *os.File
 	var err error
+	fmt.Print(font)
 	switch font {
 	case "standard":
 		file, err = os.Open("../fonts/standard.txt")
