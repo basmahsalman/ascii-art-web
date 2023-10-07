@@ -6,10 +6,10 @@ import (
 	"os"
 )
 
-var characters [][]string
-var currentCharacter []string
 
 func StoringChars(font string) [][]string {
+	var characters [][]string
+	var currentCharacter []string
 	/* storing the charecters as 2d arrays */
 	var file *os.File
 	var err error
@@ -47,6 +47,5 @@ func StoringChars(font string) [][]string {
 	if len(currentCharacter) > 0 {
 		characters = append(characters, currentCharacter)
 	}
-
 	return characters
 }
