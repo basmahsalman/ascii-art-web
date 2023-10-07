@@ -3,11 +3,10 @@ package main
 import (
 	"fmt"
 	"text/template"
-
 	//"html/template"
-	ar "asciiartweb"
 	"log"
 	"net/http"
+	ar "asciiartweb"
 )
 
 var tmpl *template.Template
