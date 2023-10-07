@@ -26,8 +26,6 @@ func StoringChars(font string) [][]string {
 	}
 	if err != nil {
 		fmt.Println("Error:", err)
-		os.Exit(0)
-		// return
 	}
 	defer file.Close()
 
