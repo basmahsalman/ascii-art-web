@@ -27,9 +27,6 @@ func PrintArray(text string, banner string) string {
 			for _, char := range v {
 				for range characters[ascii][0:8] {
 					ascii = char - 32
-					//fmt.Print(characters[ascii][0:8][i])
-					//fmt.Print(strings.Join(characters[ascii][0:8][i]), " ")
-
 					PrintThis += characters[ascii][0:8][i]
 
 					break
@@ -38,6 +35,5 @@ func PrintArray(text string, banner string) string {
 			PrintThis += "\n"
 		}
 	}
-
 	return PrintThis
 }

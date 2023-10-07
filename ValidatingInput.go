@@ -2,7 +2,7 @@ package asciiartweb
 
 import (
 	"fmt"
-	"os"
+	//"os"
 )
 
 func ValidatingInput(text string) {
@@ -10,7 +10,7 @@ func ValidatingInput(text string) {
 	for i := 0; i < len(text); i++ {
 		if text[i] < 32 || text[i] > 126 {
 			fmt.Println("invalid charecter")
-			os.Exit(0)
+			//os.Exit(0)
 		}
 	}
 }
