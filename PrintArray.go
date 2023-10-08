@@ -1,8 +1,9 @@
 package asciiartweb
 
-// import (
-// 	"strings"
-// )
+import (
+	"strings"
+	"fmt"
+)
 
 
 func PrintArray(text string, banner string) string {
@@ -10,11 +11,19 @@ func PrintArray(text string, banner string) string {
 	characters := StoringChars(banner)
 	PrintThis += "\n"
 	var ascii rune
-	//newLine := strings.Split(text, " ")
-	//for _, v := range newLine {
+	newtext := strings.ReplaceAll(text, "\r", "")
+	newLine := strings.Split(newtext, "\n")
+	for _, v := range newLine {
+		if v == "" {
+			PrintThis += "\n"
+			continue
+		}
 		/* printing the charecters */
 		for i := 0; i < 8; i++ {
-			for _, char := range text {
+			for _, char := range v {
+				// if strings.Contains(text, "\r\n") {
+				// 	PrintThis += "\n"
+				// }
 				for range characters[ascii][0:8] {
 					ascii = char - 32
 					PrintThis += characters[ascii][0:8][i]
@@ -24,6 +33,6 @@ func PrintArray(text string, banner string) string {
 			}
 			PrintThis += "\n"
 		}
-	//}
+	}
 	return PrintThis
 }
