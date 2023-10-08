@@ -2,15 +2,12 @@ package main
 
 import (
 	"fmt"
-	"text/template"
-
-	//"html/template"
+	"text/template"	
 	ar "asciiartweb"
 	"log"
 	"net/http"
 )
 
-// html/teplate
 var tmpl *template.Template
 var anss *template.Template
 
@@ -94,13 +91,19 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// fmt.Fprintf(w, "POST request successful")
+
 	text := r.FormValue("text")
+	// fmt.Fprintf(w, "Text = %s\n", text)
+	// fmt.Fprintf(w, "Banner = %s\n", banner)
 
 	// Call Validating Inputs
 	ar.ValidatingInput(text)
 
 	// Calling Storing Function
 	ans := ar.PrintArray(text, banner)
+	// fmt.Print(ans)
+	//fmt.Fprint(w, ans)
 
 	anss.Execute(w, ans)
 }
