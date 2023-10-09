@@ -1,5 +1,8 @@
 how to creat a website ?
 1- creat the web server
+built-in HTTP packages are already provided in golang,
+we need a web server to accept a GET request and serve a respone,
+the make the web server respond to a POST request submitted by a form
 2- define handlers
 3- connect(import) package ascii-art
 4- HTML 
@@ -23,3 +26,14 @@ the template is created
 fonts are added
 handlers are done
 404, 400, 500 are done
+
+------------------------------------------------------------------------------------------
+*1 -Package template implements data-driven templates for generating textual output.
+    we have 2 (input(text), output(converted))
+
+   -Templates are executed by applying them to a data structure (textBanner in our case). 
+   Annotations in the template refer to elements of the data structure (typically a field
+   of a struct or a key in a map) to control execution and derive values to be displayed. 
+   Execution  of the template walks the structure and sets the cursor, represented by a period '.' 
+   and called "dot", to the value at the current location in the structure as execution 
+   proceeds.
