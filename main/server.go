@@ -5,9 +5,10 @@ import (
 	"text/template"	
 	ar "asciiartweb"
 	"log"
-	"net/http"
+	"net/http" //privides all the functionality for creating the web server
 )
 
+/* text/template  *1 */
 var tmpl *template.Template
 var anss *template.Template
 
@@ -27,6 +28,7 @@ func main() {
 	http.HandleFunc("/ascii-art", formHandler)
 
 	fmt.Printf("Starting the server at port 8080\n")
+	//ListAndServe method allows us to start the web server and specify the port to listen for incoming requests
 	if err := http.ListenAndServe(":8080", nil); err != nil {
 		log.Fatal(err)
 	}
@@ -39,7 +41,7 @@ func main() {
 // 	// arabic
 // }
 
-// again handler for gathering data
+// HandleFunc function to add route handlers to the web server
 func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
 		http.Error(w, "404 Page not found", http.StatusNotFound)
@@ -52,17 +54,18 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 		}
 		return
 	}
-	// ascii is the converted text we want to print
+	// to read the data from the form
 	ascii := textBanner{
 		converted: r.FormValue("converted"),
 	}
 	tmpl.Execute(w, struct {
+		// to confirm
 		Success bool
 		ascii   textBanner
 	}{true, ascii})
 }
 
-// handler for the server
+// formHandler function, holds all the logic related to the /ascii-art request.
 func formHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
 		fmt.Fprintf(w, "ParseForm() err: %v", err)
@@ -77,10 +80,6 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	banner := r.Form.Get("banner")
-	// if (banner != "standard") || (banner != "shadow") || (banner != "thinkertoy") {
-	// 	http.Error(w, "500 Internal server error.", http.StatusInternalServerError)
-	// 	return
-	// }
 	switch banner {
 	case "standard":
 	case "shadow":
@@ -91,19 +90,13 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// fmt.Fprintf(w, "POST request successful")
-
 	text := r.FormValue("text")
-	// fmt.Fprintf(w, "Text = %s\n", text)
-	// fmt.Fprintf(w, "Banner = %s\n", banner)
 
 	// Call Validating Inputs
 	ar.ValidatingInput(text)
 
 	// Calling Storing Function
 	ans := ar.PrintArray(text, banner)
-	// fmt.Print(ans)
-	//fmt.Fprint(w, ans)
 
 	anss.Execute(w, ans)
 }
