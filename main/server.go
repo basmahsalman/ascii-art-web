@@ -81,7 +81,7 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 	case "thinkertoy":
 		break
 	default:
-		http.Error(w, "500 Internal server error.", http.StatusInternalServerError)
+		http.Error(w, "404 banner not found", http.StatusNotFound)
 		return
 	}
 	
