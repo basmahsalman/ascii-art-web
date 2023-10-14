@@ -5,17 +5,17 @@ import (
 	"text/template"	
 	ar "asciiartweb"
 	"log"
-	"net/http" //privides all the functionality for creating the web server
+	"net/http" //proiveds all the functionality for creating the web server
 )
 
 /* text/template  *1 */
 var tmpl *template.Template
 var anss *template.Template
+var text string
 
 func init() {
 	tmpl = template.Must(template.ParseFiles("../static/index.html"))
 	anss = template.Must(template.ParseFiles("../static/form.html"))
-
 }
 
 type textBanner struct {
@@ -33,13 +33,6 @@ func main() {
 		log.Fatal(err)
 	}
 }
-
-// 	// Bad Request 400 - incorrect request
-// 	// blank
-
-// 	// Internal server error 500 - unhadled errors
-// 	// arabic
-// }
 
 // HandleFunc function to add route handlers to the web server
 func Handler(w http.ResponseWriter, r *http.Request) {
@@ -72,10 +65,12 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	if r.Method != http.MethodPost {
-		http.Error(w, "Method is not supported", http.StatusMethodNotAllowed)
+		http.Error(w, "405 Method is not supported", http.StatusMethodNotAllowed)
 		return
 	}
-	if r.FormValue("text") == "" {
+	text = r.FormValue("text")
+	text = ar.ValidatingInput(text)
+	if text == "" {
 		http.Error(w, "400 Bad Request.", http.StatusBadRequest)
 		return
 	}
@@ -89,13 +84,7 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "500 Internal server error.", http.StatusInternalServerError)
 		return
 	}
-
-	text := r.FormValue("text")
-
-	// Call Validating Inputs
-	ar.ValidatingInput(text)
-
-	// Calling Storing Function
+	
 	ans := ar.PrintArray(text, banner)
 
 	anss.Execute(w, ans)
