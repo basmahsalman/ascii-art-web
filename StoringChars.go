@@ -9,6 +9,8 @@ import (
 
 func StoringChars(font string) [][]string {
 	var characters [][]string
+	var nothing [][]string
+
 	var currentCharacter []string
 	/* storing the charecters as 2d arrays */
 	var file *os.File
@@ -25,7 +27,9 @@ func StoringChars(font string) [][]string {
 		file, err = os.Open("../fonts/standard.txt")
 	}
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("Error: ", err)
+		return nothing
+		//here 500
 	}
 	defer file.Close()
 

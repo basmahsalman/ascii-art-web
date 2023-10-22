@@ -8,6 +8,9 @@ import (
 func PrintArray(text string, banner string) string {
 	var PrintThis string
 	characters := StoringChars(banner)
+	if characters == nil {
+		return "no"
+	}
 	PrintThis += "\n"
 	var ascii rune
 	newtext := strings.ReplaceAll(text, "\r", "")
