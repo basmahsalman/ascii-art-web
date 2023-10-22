@@ -86,6 +86,12 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	
 	ans := ar.PrintArray(text, banner)
+	if ans == "no" {
+		http.Error(w, "500 internal server error", http.StatusInternalServerError)
+		return
+	}
+	 
+
 
 	anss.Execute(w, ans)
 }
