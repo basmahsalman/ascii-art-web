@@ -2,7 +2,55 @@
 <html>
 <head>
     <title> Ascii Art Web :p </title>
-    <link rel="stylesheet" href="../styling/main.css">
+    <!-- <link rel="stylesheet"  href="/styling/main.css"> -->
+    <style>
+        h1 {
+            color: rgb(255, 33, 167 );
+            text-align: center;
+        }
+         body {
+            text-align: center;
+            font-family: verdana;
+            font-size: 20px;
+            /* background-image: url("../imgs/img1.jpeg"); */
+            background-image: url("https://i.pinimg.com/originals/ff/53/5d/ff535d2324bec47b88ee1adfe6324177.jpg");
+            background-size: cover;
+        }
+     
+        input[type="submit"] {
+            background-color: #0a0a0a;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+        input[type="submit"]:hover {
+            background-color: #686666;
+        }
+
+        div {
+            background-color: white;
+            justify-content: center;
+            width: 55%;
+            margin: auto;
+            margin-top: 100px;
+            border-radius: 50px;
+            padding: 50px;
+        }
+        button {
+            background-color: rgb(255, 33, 167 );
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+
+    </style>
 </head>
 <body>
     {{if .Success}}
@@ -13,6 +61,7 @@
   <form method="POST" action="/ascii-art">     
       <label>Text</label>
       <textarea name="text" type="text"></textarea>
+      <br><br>
       <label>Choose a Banner</label>
      <select name="banner" id="banner">
      <option value="standard">standard</option>
@@ -20,7 +69,10 @@
      <option value="thinkertoy">thinkertoy</option>
      </select>
      <br><br>
-      <input type="submit" value="submit" />
+     <label for="color">Select color:</label>
+     <input type="color" id="color" name="color" value="#000000">
+     <br><br>
+      <button type="submit" value="submit">submit</button>
   </form>
 </div>
 {{end}}

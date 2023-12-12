@@ -7,11 +7,10 @@ Ascii-art-web takes an input (text) and banner (font), and disply the output as 
 
 
 ## Authors
-@fhamza https://learn.reboot01.com/git/fhamza
 
 @bsalman https://learn.reboot01.com/git/bsalman
 
-@zasaed https://learn.reboot01.com/git/zasaeed
+@zasaeed https://learn.reboot01.com/git/zasaeed
 
 ## Usage: how to run
 -run the server: $go run . server.go
