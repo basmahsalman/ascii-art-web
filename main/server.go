@@ -12,6 +12,7 @@ import (
 var tmpl *template.Template
 var anss *template.Template
 var text string
+var rgb string
 
 func init() {
 	tmpl = template.Must(template.ParseFiles("../static/index.html"))
@@ -37,7 +38,10 @@ func main() {
 // HandleFunc function to add route handlers to the web server
 func Handler(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path != "/" {
-		http.Error(w, "404 Page not found", http.StatusNotFound)
+		// w.WriteHeader(http.StatusBadRequest)
+		http.ServeFile(w, r, "../static/404.html")
+		// fmt.Fprintf(w, "hello there mate")
+		// http.Error(w, "404 Page not found", http.StatusNotFound)
 		return
 	}
 	if r.Method != http.MethodPost {
@@ -61,17 +65,23 @@ func Handler(w http.ResponseWriter, r *http.Request) {
 // formHandler function, holds all the logic related to the /ascii-art request.
 func formHandler(w http.ResponseWriter, r *http.Request) {
 	if err := r.ParseForm(); err != nil {
-		fmt.Fprintf(w, "ParseForm() err: %v", err)
+		// w.WriteHeader(http.StatusBadRequest)
+		http.ServeFile(w, r, "../static/400.html")
+		// fmt.Fprintf(w, "ParseForm() err: %v", err)
 		return
 	}
 	if r.Method != http.MethodPost {
-		http.Error(w, "405 Method is not supported", http.StatusMethodNotAllowed)
+		// http.Error(w, "405 Method is not supported", http.StatusMethodNotAllowed)
+		// w.WriteHeader(http.StatusBadRequest)
+		http.ServeFile(w, r, "../static/400.html")
 		return
 	}
 	text = r.FormValue("text")
 	text = ar.ValidatingInput(text)
 	if text == "" {
-		http.Error(w, "400 Bad Request.", http.StatusBadRequest)
+		http.ServeFile(w, r, "../static/400.html")
+
+		// http.Error(w, "400 Bad Request.", http.StatusBadRequest)
 		return
 	}
 	banner := r.Form.Get("banner")
@@ -87,11 +97,41 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 	
 	ans := ar.PrintArray(text, banner)
 	if ans == "no" {
-		http.Error(w, "500 internal server error", http.StatusInternalServerError)
+		http.ServeFile(w, r, "../static/500.html")
+		// http.Error(w, "500 internal server error", http.StatusInternalServerError)
 		return
 	}
+
+	color := r.Form.Get("color")
+
+	// fmt.Println(color)
+
+	if color == ""{
+		http.ServeFile(w, r, "../static/500.html")
+		// http.Error(w, "500 internal server error", http.StatusInternalServerError)
+		return
+	}
+
+	// rgb, err := ar.Colorize(color)
+
+	// if err!= nil{
+	// 	fmt.Fprintf(w, "ParseForm() err: %v", err)
+	// return
+	// }
 	 
+	// fmt.Print(rgb)
+	// ans = fmt.Sprintf("\033[38;2;%d;%d;%dm%s\033[0m", rgb.R, rgb.G, rgb.B, ans)
+	// str := fmt.Sprintf("<div style=\"color: rgb(%d, %d, %d);\">%s</div>", rgb.R, rgb.G, rgb.B, template.HTMLEscapeString(ans))
 
-
-	anss.Execute(w, ans)
+	type final struct {
+		Color string
+		Result string
+	}
+	
+	data := &final {
+		Result: ans,
+		Color : color,
+	}
+	
+	anss.Execute(w, data)
 }

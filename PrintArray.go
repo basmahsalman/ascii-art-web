@@ -35,3 +35,4 @@ func PrintArray(text string, banner string) string {
 	}
 	return PrintThis
 }
+
