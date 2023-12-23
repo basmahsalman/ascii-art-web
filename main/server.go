@@ -112,17 +112,6 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// rgb, err := ar.Colorize(color)
-
-	// if err!= nil{
-	// 	fmt.Fprintf(w, "ParseForm() err: %v", err)
-	// return
-	// }
-	 
-	// fmt.Print(rgb)
-	// ans = fmt.Sprintf("\033[38;2;%d;%d;%dm%s\033[0m", rgb.R, rgb.G, rgb.B, ans)
-	// str := fmt.Sprintf("<div style=\"color: rgb(%d, %d, %d);\">%s</div>", rgb.R, rgb.G, rgb.B, template.HTMLEscapeString(ans))
-
 	type final struct {
 		Color string
 		Result string
