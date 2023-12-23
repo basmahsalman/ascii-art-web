@@ -104,8 +104,6 @@ func formHandler(w http.ResponseWriter, r *http.Request) {
 
 	color := r.Form.Get("color")
 
-	// fmt.Println(color)
-
 	if color == ""{
 		http.ServeFile(w, r, "../static/500.html")
 		// http.Error(w, "500 internal server error", http.StatusInternalServerError)
